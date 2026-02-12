@@ -1,347 +1,135 @@
-# 🌍 Wargame
+# Turborepo starter
 
-Persistent Asynchronous MMO War Strategy Game
+This Turborepo starter is maintained by the Turborepo core team.
 
----
+## Using this example
 
-## 🎯 Project Overview
+Run the following command:
 
-**Wargame** is a web-based persistent multiplayer strategy game where players act as independent warlords contributing to a living, continuously evolving faction war.
-
-Players produce military formations, deploy forces to battlefronts, coordinate through clans, and influence faction-level territorial control through asynchronous strategic gameplay.
-
-Inspired by:
-
-- PlanetSide 2
-- Foxhole
-- Operational-level and grand strategy war simulations
-
----
-
-## 🧠 Core Design Philosophy
-
-Wargame emphasizes:
-
-- Strategic timing over reflex gameplay
-- Social coordination over individual hero mechanics
-- Persistent war storytelling
-- Controlled randomness over deterministic outcomes
-- Tactical escalation and battlefield objectives
-- Risk vs reward decision making
-
----
-
-## 🌐 Game Structure
-
-### Persistent War Simulation
-
-- War progresses continuously in scheduled resolution cycles
-- Multiple maps and battlefronts operate simultaneously
-- Territory control shifts based on faction performance
-
-### Player Role
-
-Players act as **Warlords** who:
-
-- Produce military formations
-- Manage readiness and equipment durability
-- Deploy units strategically
-- Contribute to clan and faction war efforts
-
----
-
-## ⚔️ Major Game Systems
-
-### ⏱ War Resolution Cycles
-
-- Battles resolve at fixed intervals (target: ~10 minutes)
-- Units deployed to battlefronts participate in combat simulations
-- Results determine casualties, territorial control, and salvage
-
----
-
-### 👤 Unit Lifecycle
-
-Each unit formation tracks:
-
-- Durability (equipment condition)
-- Readiness (fatigue / cohesion)
-- Veterancy / Experience
-- Specialization Traits
-
-#### Deployment
-
-Units must be manually committed by players.
-
-#### Combat Outcomes
-
-Units may:
-
-- Return damaged
-- Return intact
-- Be permanently destroyed
-
----
-
-### 🔧 Durability System
-
-Represents equipment integrity.
-
-- Repaired via resource investment
-- Heavy units require higher repair cost and time
-
----
-
-### ⏱ Readiness / Fatigue System
-
-Represents human recovery.
-
-- Time-based recovery only
-- Cannot be accelerated with resources
-- Lower readiness reduces performance and increases casualties
-- Players may deploy fatigued units at risk
-
----
-
-### ♻ Salvage System
-
-Destroyed units may return small amounts of resources.
-
-- Salvage is probabilistic
-- Applied instantly after battle resolution
-- Never exceeds rebuild efficiency
-
----
-
-### 🧠 Veterancy & Specialization
-
-Units gain experience through:
-
-- Participation
-- Survival
-- Performance
-
-Veterancy provides:
-
-- Minor stat bonuses
-- Unlockable terrain or tactical specialization traits
-- Capped progression to prevent snowballing
-
----
-
-### 📡 Intelligence System
-
-Intel is faction-shared and uncertainty-based.
-
-Provides:
-
-- Enemy force strength ranges
-- Composition hints
-- Confidence levels
-
-Intel:
-
-- Improves decision quality
-- Does NOT directly improve combat strength
-
----
-
-### 🌦 Environmental Effects
-
-Dynamic environmental modifiers influence battle outcomes.
-
-#### Global Effects
-
-- Day/Night cycles
-- Weather systems
-- Seasonal modifiers
-
-#### Local Effects
-
-- Fog
-- Terrain hazards
-- Electronic interference zones
-
----
-
-## 🛡 Clan System
-
-Clans provide:
-
-- Tactical coordination
-- Voluntary cooperative resource pooling
-- Deployable battlefield assets
-
-Clans DO NOT provide permanent stat bonuses.
-
----
-
-### 🚀 Clan Battlefield Assets
-
-Clan assets are:
-
-- Powerful battlefield support tools
-- Deployable to battlefronts
-- Destroyable or removed upon map conquest
-- Major tactical escalation events
-
-Examples:
-
-- Command coordination platforms
-- Logistics sustainment carriers
-- Recon surveillance networks
-- Offensive strike platforms
-
----
-
-## 🏗 Technical Architecture
-
-Wargame is built as a TypeScript monorepo using modern full-stack web technologies.
-
----
-
-### 🧱 Repository Structure
-
-```
-apps/
-  web/        → Next.js frontend
-  worker/     → Tick resolver + background jobs
-
-packages/
-  db/         → Database schema + ORM
-  game-core/  → Shared simulation logic
-  types/      → Shared TypeScript types
+```sh
+npx create-turbo@latest
 ```
 
----
+## What's inside?
 
-### 🖥 Frontend
+This Turborepo includes the following packages/apps:
 
-- Next.js (App Router)
-- Tailwind CSS
-- TypeScript
+### Apps and Packages
 
----
+- `docs`: a [Next.js](https://nextjs.org/) app
+- `web`: another [Next.js](https://nextjs.org/) app
+- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
-### 🧠 Simulation / Backend
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-Background worker handles:
+### Utilities
 
-- War tick resolution
-- Combat simulation
-- Unit lifecycle updates
-- Clan asset state
+This Turborepo has some additional tools already setup for you:
 
----
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
 
-### 🗄 Database
+### Build
 
-- PostgreSQL (via Supabase or compatible provider)
-
----
-
-### 🔐 Authentication
-
-- Supabase Auth (planned)
-
----
-
-### 🔄 Realtime Systems
-
-Used for:
-
-- Battle updates
-- Map state changes
-- Clan asset deployment events
-
----
-
-## 🚀 Getting Started (Development)
-
-### Prerequisites
-
-- Node.js 18+
-- pnpm
-- Git
-
----
-
-### Install Dependencies
+To build all apps and packages, run the following command:
 
 ```
-pnpm install
+cd my-turborepo
+
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo build
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo build
+yarn dlx turbo build
+pnpm exec turbo build
 ```
 
----
-
-### Run Development Environment
+You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
 
 ```
-pnpm dev
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo build --filter=docs
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo build --filter=docs
+yarn exec turbo build --filter=docs
+pnpm exec turbo build --filter=docs
 ```
 
----
+### Develop
 
-### Run Worker Service
+To develop all apps and packages, run the following command:
 
 ```
-pnpm --filter worker dev
+cd my-turborepo
+
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo dev
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo dev
+yarn exec turbo dev
+pnpm exec turbo dev
 ```
 
----
+You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
 
-## 🧪 Planned Development Phases
+```
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo dev --filter=web
 
-### Phase 1 — Core Simulation MVP
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo dev --filter=web
+yarn exec turbo dev --filter=web
+pnpm exec turbo dev --filter=web
+```
 
-- Unit production
-- Deployment system
-- Combat resolution tick
-- Basic map control
-- Salvage and readiness systems
+### Remote Caching
 
----
+> [!TIP]
+> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
 
-### Phase 2 — Clan Systems
+Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
-- Clan resource contributions
-- Clan asset deployment
-- Clan coordination UI
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
 
----
+```
+cd my-turborepo
 
-### Phase 3 — Advanced Warfare Systems
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo login
 
-- Environmental effects
-- Intel system expansion
-- Veteran specialization traits
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo login
+yarn exec turbo login
+pnpm exec turbo login
+```
 
----
+This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
 
-### Phase 4 — Social & Streaming Systems
+Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
-- Spectator war overview mode
-- Clan rivalry tracking
-- Battle narrative reporting
+```
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo link
 
----
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo link
+yarn exec turbo link
+pnpm exec turbo link
+```
 
-## 🤝 Contributing
+## Useful Links
 
-Currently early-stage and experimental.
+Learn more about the power of Turborepo:
 
-Contribution guidelines will be added as the project stabilizes.
-
----
-
-## 📜 License
-
-TBD
-
----
-
-## 🧭 Project Status
-
-Early Design & Infrastructure Phase
-
----
+- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
+- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
+- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
+- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
+- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
+- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
