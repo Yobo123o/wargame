@@ -1,135 +1,421 @@
-# Turborepo starter
+# 🌍 Wargame
 
-This Turborepo starter is maintained by the Turborepo core team.
+Persistent Asynchronous MMO War Strategy Game
 
-## Using this example
+---
 
-Run the following command:
+## 🎯 Project Overview
 
-```sh
-npx create-turbo@latest
+**Wargame** is a web-based persistent multiplayer strategy game where players act as independent warlords contributing to a living, continuously evolving faction war.
+
+Players produce military formations, deploy forces to battlefronts, coordinate through clans, and influence faction-level territorial control through asynchronous strategic gameplay.
+
+Inspired by:
+
+- PlanetSide 2
+- Foxhole
+- Grand Strategy and Operational-Level War Simulations
+
+---
+
+## 🧠 Core Design Philosophy
+
+Wargame emphasizes:
+
+- Strategic timing over reflex gameplay
+- Social coordination over individual hero mechanics
+- Persistent war storytelling
+- Controlled randomness over deterministic outcomes
+- Tactical escalation and battlefield objectives
+- Risk vs reward decision making
+- MMO-scale cooperative warfare
+
+---
+
+## 🌐 Game Structure
+
+### Persistent War Simulation
+
+- War progresses continuously in scheduled resolution cycles
+- Multiple maps and battlefronts operate simultaneously
+- Territory control shifts based on faction performance
+- Map conquest resets battlefield deployments and assets
+
+---
+
+### Player Role — Warlords
+
+Players act as independent **Warlords** who:
+
+- Produce military formations
+- Manage readiness and equipment durability
+- Deploy units strategically
+- Contribute to clan and faction war efforts
+- Maintain and specialize veteran formations
+
+---
+
+## ⚔️ Major Game Systems
+
+---
+
+### ⏱ War Resolution Cycles
+
+- Battles resolve at fixed intervals (target: ~10 minutes)
+- Units deployed to battlefronts participate in combat simulations
+- Results determine:
+    - Casualties
+    - Territorial changes
+    - Salvage recovery
+    - Unit experience gain
+
+---
+
+### 👤 Unit Lifecycle
+
+Each military formation tracks:
+
+- Durability (Equipment Condition)
+- Readiness (Fatigue / Cohesion)
+- Veterancy / Experience
+- Specialization Traits
+
+#### Deployment
+
+Units must be manually committed by players.
+
+#### Combat Outcomes
+
+Units may:
+
+- Return damaged
+- Return intact
+- Be permanently destroyed
+
+---
+
+### 🔧 Durability System
+
+Represents equipment integrity and battlefield wear.
+
+- Repaired via resource investment
+- Heavy units require higher repair cost and time
+- Durability impacts combat effectiveness
+
+---
+
+### ⏱ Readiness / Fatigue System
+
+Represents human recovery and combat readiness.
+
+- Time-based recovery only
+- Cannot be accelerated using resources
+- Low readiness reduces combat performance
+- Players may deploy fatigued units at increased risk
+
+---
+
+### ♻ Salvage System
+
+Destroyed units may return partial resources.
+
+- Salvage is probabilistic
+- Applied instantly after battle resolution
+- Never exceeds rebuild efficiency
+- Provides consolation for battlefield losses
+
+---
+
+### 🧠 Veterancy & Specialization
+
+Units gain experience through:
+
+- Combat participation
+- Survival
+- Performance relative to expectations
+
+Veterancy provides:
+
+- Minor stat bonuses
+- Unlockable specialization traits
+- Terrain and counter-unit effectiveness
+
+Veterancy progression is capped to prevent snowballing.
+
+---
+
+### 📡 Intelligence System
+
+Intel is faction-shared and uncertainty-based.
+
+Provides:
+
+- Enemy force strength ranges
+- Composition hints
+- Confidence level indicators
+
+Intel:
+
+- Improves decision quality
+- Does NOT directly improve combat strength
+- Decays over time
+
+---
+
+### 🌦 Environmental Effects
+
+Dynamic environmental modifiers influence battles.
+
+#### Global Effects
+- Day / Night Cycles
+- Weather Systems
+- Seasonal Modifiers
+
+#### Local Effects
+- Fog
+- Terrain Hazards
+- Electronic Warfare Interference Zones
+
+---
+
+## 🛡 Clan System
+
+Clans provide:
+
+- Tactical coordination
+- Cooperative resource pooling
+- Access to deployable battlefield assets
+
+Clans DO NOT provide permanent stat bonuses.
+
+Clan contributions are:
+
+- Fully voluntary
+- Transparent
+- Socially incentivized
+
+---
+
+### 🚀 Clan Battlefield Assets
+
+Clan assets are:
+
+- High-impact battlefield support platforms
+- Deployable to active battlefronts
+- Destroyable objectives
+- Removed when destroyed or map is conquered
+
+Assets never expire passively.
+
+#### Asset Categories
+
+##### Command Assets
+Improve coordination and readiness preservation.
+
+##### Logistics Assets
+Provide repair and sustainment support.
+
+##### Recon Assets
+Improve intelligence accuracy.
+
+##### Offensive Assets
+Provide temporary combat escalation potential.
+
+---
+
+## 🧭 Strategic Warfare Model
+
+```
+Units → Player Strategy
+Clan Assets → Tactical Battlefield Momentum
+Faction Control → Strategic War Outcome
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## ⚖ War Tempo & Strategic Risk
 
-### Apps and Packages
+The game enforces pacing through:
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- Unit fatigue systems
+- Production time requirements
+- Multi-front exposure risk
+- Deployment opportunity cost
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+---
 
-### Utilities
+## 🎥 Spectator & Overview Mode
 
-This Turborepo has some additional tools already setup for you:
+The game provides a live overview interface displaying:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- Map control status
+- Active battlefronts
+- Clan asset deployments
+- War momentum trends
 
-### Build
+Designed for streaming and spectator engagement.
 
-To build all apps and packages, run the following command:
+---
 
-```
-cd my-turborepo
+## 🏗 Technical Architecture
 
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
+Wargame is built as a TypeScript monorepo using modern web technologies.
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+---
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### 🧱 Repository Structure
 
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+apps/
+  web/        → Next.js frontend
+  worker/     → War tick resolver and background simulation
+  docs/       → Documentation and design reference
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+packages/
+  db/         → Database schema and ORM
+  game-core/  → Shared simulation and combat logic
+  types/      → Shared TypeScript type definitions
+  ui/         → Shared UI component library
 ```
 
-### Develop
+---
 
-To develop all apps and packages, run the following command:
+### 🖥 Frontend
+
+- Next.js (App Router)
+- Tailwind CSS
+- TypeScript
+- ShadCN UI Components (planned)
+
+---
+
+### 🧠 Simulation / Backend
+
+Background worker handles:
+
+- War tick resolution
+- Combat simulation
+- Unit lifecycle updates
+- Clan asset state management
+
+---
+
+### 🗄 Database
+
+- PostgreSQL via Supabase
+
+---
+
+### 🔐 Authentication
+
+- Supabase Auth
+
+---
+
+### 🔄 Realtime Systems
+
+Used for:
+
+- Battle updates
+- Map state changes
+- Clan asset deployment notifications
+
+---
+
+## 🚀 Development Setup
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+- Git
+
+---
+
+### Install Dependencies
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+npm install
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
+
+### Run Development Environment
 
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+npm run dev
 ```
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+### Run Worker Service
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+npm run start --workspace=@wargame/worker
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+---
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## 🧪 Planned Development Phases
 
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
+---
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+### Phase 1 — Core Simulation MVP
 
-## Useful Links
+- Unit production system
+- Deployment mechanics
+- Combat resolution tick
+- Basic map control
+- Salvage and readiness mechanics
 
-Learn more about the power of Turborepo:
+---
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+### Phase 2 — Clan Warfare Systems
+
+- Clan resource contributions
+- Clan battlefield asset deployment
+- Clan coordination UI
+
+---
+
+### Phase 3 — Advanced Warfare Systems
+
+- Environmental effects
+- Expanded intelligence systems
+- Veteran specialization mechanics
+
+---
+
+### Phase 4 — Social & Spectator Systems
+
+- War overview streaming mode
+- Clan rivalry tracking
+- Battle narrative reporting
+
+---
+
+## 🤝 Contributing
+
+Currently early-stage and experimental.
+
+Contribution guidelines will be added as the project stabilizes.
+
+---
+
+## 📜 License
+
+TBD
+
+---
+
+## 🧭 Project Status
+
+Early Design & Infrastructure Phase
+
+---
+
+## 👨‍💻 Author
+
+Project created and maintained by the founding developer.
+
+---
