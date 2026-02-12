@@ -42,6 +42,7 @@ yarn-error.log*
 # env / secrets
 **/.env
 **/.env.*
+!**/.env.example
 
 # next / builds
 **/.next
